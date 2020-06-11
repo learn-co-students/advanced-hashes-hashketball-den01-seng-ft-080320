@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -125,5 +126,72 @@ def game_hash
     }
   }
 end
+
+def num_points_scored(player_name)
+  game_hash.each do |hoa, team_stats|
+    team_stats[:players].each do
+      counter = 0
+      while counter < team_stats[:players].length do
+        if team_stats[:players][counter][:player_name] == player_name
+          return team_stats[:players][counter][:points]
+        end
+      counter += 1  
+      end
+    end  
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |hoa, team_stats|
+    team_stats[:players].each do
+      counter = 0
+      while counter < team_stats[:players].length do
+        if team_stats[:players][counter][:player_name] == player_name
+          return team_stats[:players][counter][:shoe]
+        end
+      counter += 1  
+      end
+    end  
+  end
+end
+
+def team_colors(team)
+  game_hash.each do |hoa, team_stats|
+    if team_stats[:team_name] == team
+      return team_stats[:colors]
+    end
+  end
+end
+
+def team_names()
+  return game_hash[:home][:team_name], game_hash[:away][:team_name]
+end
+
+def player_numbers(team)
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team
+      team_nums = Array.new
+      counter = 0
+      #binding.pry
+      while counter < team_data[:players].length do
+        team_nums << team_data[:players][counter][:number]
+        #binding.pry
+        counter += 1
+      end
+    else
+      next
+    end
+    return team_nums
+  end
+end
+
+def player_stats(player_name)
+
+#p game_hash[:away][:players][0][:shoe]
+
+puts player_numbers("Charlotte Hornets")
+
+
+
 
 # Write code here
