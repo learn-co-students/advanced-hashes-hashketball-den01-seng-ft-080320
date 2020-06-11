@@ -207,7 +207,16 @@ def big_shoe_rebounds
     shoes << game_hash[:away][:players][i][:shoe]
     i += 1
   end
-  bigfoot = shoes.max
+  game_hash.each do |location, team_data|
+    team_data[:players].each do
+      index = 0 
+      while index < team_data[:players] do
+        if team_data[:players][index][:shoe] == shoes.max
+          return team_data[:players][index][:rebounds]
+        end
+      end
+    end
+  end
 end
 
 
