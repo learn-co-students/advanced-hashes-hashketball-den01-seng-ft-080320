@@ -210,31 +210,16 @@ def big_shoe_rebounds
   game_hash.each do |location, team_data|
     team_data[:players].each do
       index = 0 
-      while index < team_data[:players] do
+      while index < team_data[:players].length do
         if team_data[:players][index][:shoe] == shoes.max
           return team_data[:players][index][:rebounds]
         end
+        index += 1
       end
     end
   end
 end
 
-
-'''def big_shoe_rebounds
-  shoes = Array.new
-  i = 0
-  while i < game_hash[:home][:players].length do
-    shoes << game_hash[:home][:players][i][:shoe]
-    i += 1
-  end
-  i = 0
-  binding.pry
-  while i < game_hash[:away][:players].length
-    shoes << game_hash[:away][:players][i][:shoe]
-    i += 1
-  end
-  shoes
-end'''
 
 #p game_hash[:away][:players][0][:shoe]
 
