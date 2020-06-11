@@ -186,6 +186,17 @@ def player_numbers(team)
 end
 
 def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do
+      counter = 0 
+      while counter < team_data[:players].length do
+        if team_data[:players][counter][:player_name] == player_name
+          return team_data[:players][counter]
+        end
+      end
+    end
+  end
+end
 
 #p game_hash[:away][:players][0][:shoe]
 
