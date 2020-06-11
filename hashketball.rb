@@ -193,14 +193,44 @@ def player_stats(player_name)
         if team_data[:players][counter][:player_name] == player_name
           return team_data[:players][counter]
         end
+        counter += 1
       end
     end
   end
 end
 
+def big_shoe_rebounds
+  shoes = Array.new
+  i = 0
+  while i < game_hash[:home][:players].length && i < game_hash[:away][:players].length do
+    shoes << game_hash[:home][:players][i][:shoe]
+    shoes << game_hash[:away][:players][i][:shoe]
+    i += 1
+  end
+  bigfoot = shoes.max
+end
+
+
+'''def big_shoe_rebounds
+  shoes = Array.new
+  i = 0
+  while i < game_hash[:home][:players].length do
+    shoes << game_hash[:home][:players][i][:shoe]
+    i += 1
+  end
+  i = 0
+  binding.pry
+  while i < game_hash[:away][:players].length
+    shoes << game_hash[:away][:players][i][:shoe]
+    i += 1
+  end
+  shoes
+end'''
+
 #p game_hash[:away][:players][0][:shoe]
 
-puts player_numbers("Charlotte Hornets")
+puts big_shoe_rebounds
+
 
 
 
