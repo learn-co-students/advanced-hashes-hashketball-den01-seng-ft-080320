@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +128,113 @@ def game_hash
   }
 end
 
-# Write code here
+# game_hash
+#   { home: {
+#       team_name: "Brooklyn Nets",
+#       colors: ["Black", "White"],
+#       players: [
+#         {
+
+def num_points_scored(name)
+    points = 0
+    game_hash.each do |location, team_hash|
+      team_hash[:players].each do |player|
+        if player[:player_name] == name
+          points = player[:points]
+        end  
+      end  
+    end
+    points
+end  
+
+
+def shoe_size(name)
+    size = 0
+    game_hash.each do |location, team_hash|
+        team_hash[:players].each do |player|
+          if player[:player_name] == name
+            size = player[:shoe]
+          end  
+        end  
+    end
+    size
+end 
+
+def team_colors(team_name)
+  team_colors = []
+  game_hash.each do |location, team_hash|
+      if team_hash[:team_name] == team_name 
+        team_colors = team_hash[:colors]
+      end
+  end
+  team_colors
+end 
+
+def team_names
+  teams = []
+  game_hash.each do |location, team_hash|
+    team_hash.each do |key, value|
+      if key == :team_name
+        teams << game_hash[location][:team_name]
+      end 
+    end
+  end  
+  teams
+end 
+
+def player_numbers(team_name)
+    roster = []
+    game_hash.each do |location, team_hash|
+      if team_hash[:team_name] == team_name
+        team_hash[:players].each do |player|
+          roster << player[:number]
+        end  
+      end  
+    end
+    roster
+end 
+
+def player_stats(name)
+    stats = {}
+    game_hash.each do |location, team_hash|
+       team_hash[:players].each do |player|
+         if player[:player_name] == name
+          stats = player
+         end  
+       end  
+    end
+    stats
+end 
+
+def big_shoe_rebounds
+    big_shoe = 0
+    rebounds = 0
+    game_hash.each do |location, team_hash|
+        team_hash[:players].each do |player|
+           if player[:shoe] > big_shoe
+             big_shoe = player[:shoe]
+             rebounds = player[:rebounds]
+           end
+        end
+    end
+    rebounds
+end    
+
+# OLD LONG VERSION of code using while loop....
+# def shoe_size(name)
+#     size = 0
+#     game_hash.each do |location, team_hash|
+#       team_hash.each do |key, value|
+#         if key == :players
+#           i=0 
+#           while game_hash[location][:players][i] do
+#             if game_hash[location][:players][i][:player_name] == name 
+#               size = game_hash[location][:players][i][:shoe]
+#             end
+#             i+= 1
+#           end
+#         end  
+#       end  
+#     end
+#     size
+# end  
