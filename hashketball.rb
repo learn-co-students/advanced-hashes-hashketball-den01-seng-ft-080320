@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +126,115 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player)
+  points_scored = nil
+  game_hash.each do |key, value|
+        value[:players].each do |person|
+          if person[:player_name] == player
+            points_scored = person[:points]
+          end
+      end
+  end
+  points_scored
+end
+
+def shoe_size(player)
+  shoe = nil
+  game_hash.each do |key, value|
+        value[:players].each do |person|
+          if person[:player_name] == player
+            shoe = person[:shoe]
+          end
+      end
+  end
+  shoe
+end
+
+def team_colors(team_name)
+  colors = []
+  game_hash.each do |key, value|
+    if value[:team_name] == team_name
+      colors = value[:colors]
+    end
+  end
+  colors
+end
+
+def team_names
+  final_teams = []
+  game_hash.each do |key, value|
+    value.each do |teams|
+      if teams[0] == :team_name
+        final_teams.push(teams[1])
+      end
+    end
+  end
+  final_teams
+end
+
+def player_numbers(team_name)
+  numbers = []
+  game_hash.each do |key, value|
+    if team_name == value[:team_name]
+      value[:players].each do |player_stats|
+        numbers.push(player_stats[:number])
+      end
+    end
+  end
+  numbers
+end
+
+def player_stats(player_name)
+  game_hash.each do |key, value|
+    value[:players].each do |stats|
+      if stats[:player_name] == player_name
+        return stats
+      end
+    end
+  end
+end
+
+def find_largest_shoe
+  largest_shoe_size = 0
+  game_hash.each do |key, value|
+    value[:players].each do |stats|
+      if stats[:shoe] > largest_shoe_size
+        largest_shoe_size = stats[:shoe]
+      end
+    end
+  end
+  largest_shoe_size
+end
+
+def big_shoe_rebounds
+  largest_shoe = find_largest_shoe
+  game_hash.each do |key, value|
+    value[:players].each do |stats|
+      if stats[:shoe] == largest_shoe
+        return stats[:rebounds]
+      end
+    end
+  end
+end
+
+def most_points_scored
+  most_points = 0 
+  game_hash.each do |key, value|
+    value[:players].each do |stats|
+      if stats[:points] > most_points
+        most_points = stats[:points]
+      end
+    end
+  end
+  most_points
+end
+
+
+
+
+
+
+
+
+
+
