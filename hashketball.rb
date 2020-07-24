@@ -128,44 +128,33 @@ def game_hash
   }
 end
 
-# Write code here
-#Source: I used Kyle's walkthrough video (https://www.youtube.com/watch?v=ElqBBBlGcoM) for a lot of these. I had difficulties solving these without that video but I do feel much more comfortable with everything following watching the walk-through.
-
-
-def players
-  players = game_hash[:home][:players].concat game_hash[:away][:players]
-end
-
-def find_player(player_name)
-  players.find do |player|
-    player[:player_name] == player_name
-  end
-end 
-
 def num_points_scored(player_name)
-  player = find_player(player_name)
-  player[:points]
-end
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:points]
+      end
+    end 
+  end 
+end 
 
 def shoe_size(player_name)
-  player = find_player(player_name)
-  player[:shoe]
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:shoe]
+      end
+    end 
+  end 
 end 
-
-def teams 
-  game_hash.values
-end 
-
-def find_team(team_name)
-  teams.find do |team|
-    team[:team_name] == team_name
-  end
-end
 
 def team_colors(team_name)
-  team = find_team(team_name) 
-  team[:colors]
-end
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name 
+      return team_data[:colors]
+    end 
+  end 
+end 
 
 def team_names
   result = []
@@ -175,19 +164,83 @@ end
 
 def player_numbers(team_name)
   game_hash.each do |location, team_data|
-    if team_data[:team_name] == team_name
+    if team_data[:team_name] == team_name 
       return team_data[:players].collect do |player|
         player[:number]
+      end 
+    end
+  end 
+end
+
+def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player
       end 
     end 
   end 
 end 
 
-def player_stats(player_name)
-  player = find_player(player_name)
-end 
+def players
+  players = []
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      players << player
+    end   
+  end
+  players 
+end
 
 def big_shoe_rebounds
   players.max_by{|k| k[:shoe]}[:rebounds]
-end 
-#https://stackoverflow.com/questions/39581381/find-the-highest-value-in-an-array-of-hashes-in-ruby
+end
+
+#def players
+#  players = game_hash[:home][:players].concat game_hash[:away][:players]
+#end
+
+#def find_player(player_name)
+#  players.find do |player|
+#    player[:player_name] == player_name
+#  end
+#end 
+
+#def num_points_scored(player_name)
+#  player = find_player(player_name)
+#  player[:points]
+#end
+
+#def shoe_size(player_name)
+#  player = find_player(player_name)
+#  player[:shoe]
+#end 
+
+#def teams 
+#  game_hash.values
+#end 
+
+#def find_team(team_name)
+#  teams.find do |team|
+#    team[:team_name] == team_name
+#  end
+#end
+
+#def team_colors(team_name)
+#  team = find_team(team_name) 
+#  team[:colors]
+#end
+
+#def player_numbers(team_name)
+#  game_hash.each do |location, team_data|
+#    if team_data[:team_name] == team_name
+#      return team_data[:players].collect do |player|
+#        player[:number]
+#      end 
+#    end 
+#  end 
+#end 
+
+#def player_stats(player_name)
+#  player = find_player(player_name)
+#end 
