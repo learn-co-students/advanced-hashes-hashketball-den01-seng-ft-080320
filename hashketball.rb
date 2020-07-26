@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +126,134 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  data = game_hash
+  
+  data.each do |key, value|
+    value.each do |key2, value2|
+      if key2 == :players
+        value2.each do |k, v|
+          if k[:player_name] == player_name
+            return k[:points]
+          end
+        end
+      end
+    end
+  end
+end
+
+def shoe_size(player_name)
+  
+  game_hash.each do |key, value|
+    value.each do |key2, value2|
+      if key2 == :players
+        value2.each do |k, v|
+          if k[:player_name] == player_name
+            return k[:shoe]
+          end
+        end
+      end
+    end
+  end
+end
+
+def team_colors(team)
+  
+  game_hash.each do |key, value|
+    value.each do |key2, value2|
+      if key2 == :team_name && value2 == team
+        value.each do |k, v|
+          if k == :colors
+            return v
+          end
+        end
+      end
+    end
+  end
+end
+
+def team_names
+  teams = []
+  
+  game_hash.each do |key, value|
+    value.each do |k, v|
+      if k == :team_name
+        teams << v
+      end
+    end
+  end
+  return teams
+end
+
+def player_numbers(team_name)
+  jersey_num = []
+  
+  game_hash.each do |key, value|
+    value.each do |k, v|
+      if v == team_name
+        value.each do |key2, val|
+          if key2 == :players
+            val.each do |players_stats, data|
+              players_stats.each do |k2, val2|
+                if k2 == :number
+                  jersey_num << val2
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  return jersey_num
+end
+
+def player_stats(name)
+  
+  game_hash.each do |key, value|
+    value.each do |k, v|
+      if k == :players
+        v.each do |key2, val|
+          key2.each do |k2, v2|
+            if k2 == :player_name && v2 == name
+              return key2
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size = 0
+  rebounds = 0
+  
+  game_hash.each do |key, value|
+    value.each do |key2, value2|
+      if key2 == :players
+        value2.each do |k, v|
+          k.each do |k2, v2|
+            if k2 == :shoe
+              if v2 >= shoe_size
+                shoe_size = v2
+                if v2 == shoe_size
+                  k.each do |k3, v3|
+                    if k3 == :rebounds
+                      rebounds = v3
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  return rebounds
+end
+
+
+
+
