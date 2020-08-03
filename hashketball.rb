@@ -131,10 +131,10 @@ def game_hash
 end
 
 
-def num_points_scored(player_search)
+def num_points_scored(player_name)
   game_hash.each do |team, team_info|
     team_info[:players].each do |player|
-      if player[:player_name] == player_search
+      if player[:player_name] == player_name
         return player[:points]
       end
     end
@@ -165,10 +165,10 @@ def team_names
   end
 end
 
-def player_numbers(input)
+def player_numbers(team_input)
   jersey_array = []
   game_hash.each do |team, team_info|
-    if team_info[:team_name] == input 
+    if team_info[:team_name] == team_input 
       team_info.each do |key, value|
         if key == :players
           value.each do |player|
