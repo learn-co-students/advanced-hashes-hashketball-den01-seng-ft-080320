@@ -166,19 +166,19 @@ def team_names
 end
 
 def player_numbers(team_input)
-  jersey_array = []
-  game_hash.each do |team, team_info|
+  # jersey_array = []
+  game_hash.map do |team, team_info|
     if team_info[:team_name] == team_input 
       team_info.each do |key, value|
         if key == :players
           value.each do |player|
-          jersey_array.push(player[:number])
+          # jersey_array.push(player[:number])
           end
         end
       end
     end
   end
-  return jersey_array
+  # return jersey_array
 end
 
 def player_stats(name)
