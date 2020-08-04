@@ -127,9 +127,19 @@ def game_hash
   }
 end
 
+
 def num_points_scored(player_name)
+  return iterate_by_player_statistic(player_name, :points)
+end
+
+def shoe_size(player_name)
+  iterate_by_player_statistic(player_name, :shoe)
+end
+=begin def num_points_scored(player_name)
   game_hash.each do |team, attributes|
+    binding.pry
     attributes[:players].each do |stats|
+      binding.pry
       if stats[:player_name] == player_name
         return stats[:points]
       end
@@ -146,6 +156,7 @@ def shoe_size(player_name)
     end
   end
 end
+=end
 
 def team_colors(home_or_away_team)
   game_hash.each do |team, attributes|
@@ -205,6 +216,19 @@ end
 def most_points_scored()
   high_scorer = ""
   most_points = 0 
+  iterate_by_player_statistic(player_name, :points)
+    if stats[:points] > most_points
+      most_points = stats[:points]
+      high_scorer = stats[:player_name]
+    end
+  end
+  high_scorer
+end 
+
+
+'''def most_points_scored()
+  high_scorer = ""
+  most_points = 0 
   game_hash.each do |team, attributes|
     attributes[:players].each do |stats|
       if stats[:points] > most_points
@@ -214,7 +238,7 @@ def most_points_scored()
     end
   end
   high_scorer
-end 
+end '''
 
 def winning_team()
   teams = team_names()
@@ -265,5 +289,48 @@ def long_name_steals_a_ton?()
     return true
   end
 end
+
+def most_points_scored()
+  high_scorer = ""
+  most_points = 0 
+  game_hash.each do |team, attributes|
+    attributes[:players].each do |stats|
+      if stats[:points] > most_points
+        most_points = stats[:points]
+        high_scorer = stats[:player_name]
+      end
+    end
+  end
+  high_scorer
+end 
+
+def iterate_by_player_statistic(player_name, statistic)
+  game_hash.each do |team, attributes|
+    attributes[:players].each do |stats|
+      return stats[statistic] if stats[:player_name] == player_name
+    end
+  end
+end
+  
+def winning_team()
+  home_points = [0, ""] 
+  away_points = [0, ""]
+  game_hash[:home].each do |attributes|
+    binding.pry
+    home_points[1] = attributes[:team_name]
+    attributes[:players].each do |stats|
+      home_points[0] += stats[:points]
+    end
+  end
+  game_hash[:away].each do |attributes|
+    binding.pry
+    away_points[1] = attributes[:team_name]
+    attributes[:players].each do |stats|
+      away_points[0] += stats[:points]
+    end
+  end
+end
+
+winning_team()
 
 # Write code here
