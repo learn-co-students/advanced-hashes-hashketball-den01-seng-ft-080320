@@ -141,6 +141,9 @@ def num_points_scored(player_name)
   end
 end
 
+
+
+
 def shoe_size(name)
   game_hash.each do |team, team_info|
     team_info[:players].each do |player|
@@ -211,5 +214,37 @@ def big_shoe_rebounds
 end
 
     
+#hashketball review with Kyle august 5
 
-# Write code here
+# def all_players
+#   home_players = game_hash[:home][:players]
+#   away_players = game_hash[:away][:players]
+
+#   home_players.concat away_players
+# end
+
+# def find_player_by_name(name)
+#   all_players.find do |player|
+#     player[:player_name] == name
+#   end
+# end
+
+# def num_points_scored name
+#   find_player_by_name(name)[:points]
+# end
+
+# def shoe_size name
+#   find_player_by_name(name)[:shoe]
+# end
+
+# def big_shoe_rebounds
+#   #find the player
+#   #get the rebounds
+#   biggest_shoe_player = all_players.max_by do |player|
+#     player[:shoe]
+#   end
+#   biggest_shoe_player[:rebounds]
+# end
+
+
+
