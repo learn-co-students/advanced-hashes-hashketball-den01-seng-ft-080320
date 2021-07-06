@@ -164,21 +164,6 @@ describe 'hashketball' do
 
   end
 
-  describe '#player_stats' do
-    it 'returns all stats for a given player' do
-      expect(player_stats("Jeff Adrien")).to eq(jeff_adrien)
-      expect(player_stats("Bismack Biyombo")).to eq(bismack_biyombo)
-      expect(player_stats("DeSagna Diop")).to eq(desagna_diop)
-      expect(player_stats("Ben Gordon")).to eq(ben_gordon)
-      expect(player_stats("Kemba Walker")).to eq(kemba_walker)
-      expect(player_stats("Alan Anderson")).to eq(alan_anderson)
-      expect(player_stats("Reggie Evans")).to eq(reggie_evans)
-      expect(player_stats("Brook Lopez")).to eq(brook_lopez)
-      expect(player_stats("Mason Plumlee")).to eq(mason_plumlee)
-      expect(player_stats("Jason Terry")).to eq(jason_terry)
-    end
-
-  end
 
   describe '#big_shoe_rebounds' do
 
